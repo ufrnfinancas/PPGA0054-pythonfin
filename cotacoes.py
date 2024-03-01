@@ -6,7 +6,7 @@ assets = ['ABEV3.SA', 'CIEL3.SA', 'COGN3.SA', 'EGIE3.SA', 'KLBN11.SA',
           'LWSA3.SA', 'MGLU3.SA', 'MRFG3.SA', 'MULT3.SA', 'PETZ3.SA' ]
 ibovdata = ['^BVSP']
 
-start = '2023-01-02'
+start = '2015-01-02'
 end = '2024-02-29'
 
 # Coleta de dados
