@@ -12,10 +12,8 @@ inicio = '2021-01-04'
 fim = '2023-12-30'
 
 df = yf.download(ativos, start=inicio, end=fim)['Adj Close']
-
 df.head()
 df.tail()
-
 df.plot(figsize=(10,10))
 plt.show()
 
@@ -23,16 +21,13 @@ df.iloc[0]
 normalizado = df/df.iloc[0]
 normalizado.loc['2021-01-04']
 normalizado.iloc[-1]
-
 normalizado.plot(figsize=(10,10));
 plt.show()
 
 retornos_diarios = df.pct_change()
 retornos_diarios.head()
-
 retornos_diarios.dropna(inplace=True)
 retornos_diarios
-
 retornos_diarios.plot(figsize=(10,10))
 plt.show()
 
@@ -48,7 +43,7 @@ retornos_medios
 risco_retorno = pd.concat([retornos_medios,volatilidade], axis=1)
 risco_retorno
 
-sns.scatterplot(data=risco_retorno, x='Vol', y='Retornos')
+sns.scatterplot(data=risco_retorno, x='Volatilidade', y='Retorno')
 plt.show()
 
 risco_retorno.index
