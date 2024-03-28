@@ -14,14 +14,14 @@ def extracao_bcb(codigo, data_inicio, data_fim):
     df['SELIC'] = df['SELIC']/100
     return df
 
-data_inicio = '01/05/1993'
-data_fim = '30/12/2023'
+data_inicio = '01/01/1995'
+data_fim = '31/03/2024'
 dados=[]
 dados = extracao_bcb(4390, data_inicio=data_inicio, data_fim=data_fim)
 indices = ['^BVSP']
 
 for i in indices:
-    dados[i] = yf.download(i, start='1993-05-01', end='2023-12-30', interval='1mo')['Adj Close'].pct_change()
+    dados[i] = yf.download(i, start='1995-01-01', end='2024-03-31', interval='1mo')['Adj Close'].pct_change()
 
 dados
 dados = dados.iloc[1:]
@@ -33,6 +33,6 @@ acumulado = dados.cumprod()
 plt.figure(figsize=(10,6))
 sns.set_style('darkgrid')
 sns.set_palette('mako')
-plt.title('Ibov x Selic')
+plt.title('Ibovespa x Selic')
 sns.lineplot(data=acumulado)
 plt.show()
