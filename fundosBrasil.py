@@ -26,8 +26,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Fetch
-arquivo = 'inf_diario_fi_202402.csv'
-link = 'https://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS/inf_diario_fi_202402.zip'
+arquivo = 'inf_diario_fi_202404.csv'
+link = 'https://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS/inf_diario_fi_202404.zip'
 
 r = requests.get(link)
 zf = zipfile.ZipFile(io.BytesIO(r.content)) # o arquivo zipado aberto
@@ -49,7 +49,7 @@ informes_diarios.head()
 informes_diarios.DT_COMPTC.unique() # achar as datas únicas
 
 #Comparando PL
-comparativo = informes_diarios[informes_diarios['DT_COMPTC'] == '2024-02-28']
+comparativo = informes_diarios[informes_diarios['DT_COMPTC'] == '2024-04-30']
 comparativo
 comparativo.sort_values('VL_PATRIM_LIQ').CNPJ_FUNDO.iloc[-1]
 
