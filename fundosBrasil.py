@@ -1,5 +1,4 @@
 # Fundos de Investimento - CVM
-
 '''
 PL dos fundos
 Variação de cota
@@ -17,14 +16,13 @@ https://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS
 http://dados.cvm.gov.br/dados/FI/CAD/DADOS
 
 '''
-
 import zipfile
 import io # alocar buffer de RAM
 import requests # solicitar o arquivo no site
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+#%%
 # Fetch
 arquivo = 'inf_diario_fi_202404.csv'
 link = 'https://dados.cvm.gov.br/dados/FI/DOC/INF_DIARIO/DADOS/inf_diario_fi_202404.zip'
@@ -90,3 +88,4 @@ fundo_df
 sns.barplot(data=fundo_df, x=fundo_df.index, y=fundo_df.PL)
 plt.xticks(rotation=270)
 plt.show() 
+#%%
