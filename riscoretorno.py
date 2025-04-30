@@ -4,6 +4,7 @@ import yfinance as yf
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import numpy as np
 
 ativos = ['PETR4.SA',	'ITUB4.SA',	'BBDC4.SA', 'VALE3.SA',	'ABEV3.SA',	
           'BBAS3.SA',	'B3SA3.SA', 'ITSA4.SA',	'BRFS3.SA',	'GGBR4.SA']
@@ -11,12 +12,18 @@ ativos = ['PETR4.SA',	'ITUB4.SA',	'BBDC4.SA', 'VALE3.SA',	'ABEV3.SA',
 inicio = '2021-01-04'
 fim = '2025-04-28'
 
-df = yf.download(ativos, start=inicio, end=fim)['Close']
+df = yf.download(ativos, start=inicio, end=fim, auto_adjust=True)['Close']
 df.head()
 df.tail()
+
+# Remover o .SA dos ativos
+df.columns = df.columns.str.replace('.SA', '')  # Remover o .SA dos ativos
+
+# O Plot
 df.plot(figsize=(10,10))
 plt.show()
 
+#Normalizando os preços
 df.iloc[0]
 normalizado = df/df.iloc[0]
 normalizado.loc['2021-01-04']
@@ -24,6 +31,7 @@ normalizado.iloc[-1]
 normalizado.plot(figsize=(10,10));
 plt.show()
 
+# Retornos em tempo discreto
 retornos_diarios = df.pct_change()
 retornos_diarios.head()
 retornos_diarios.dropna(inplace=True)
@@ -31,23 +39,32 @@ retornos_diarios
 retornos_diarios.plot(figsize=(10,10))
 plt.show()
 
+# Retornos em tempo contínuo e o plot 
+retornos_continuos = np.log(df/df.shift(1)) 
+retornos_continuos.head()
+retornos_continuos.dropna(inplace=True)
+retornos_continuos.plot(figsize=(10,10))
+plt.show()
+
+# Desvio padrão dos retornos diários
 retornos_diarios.std()
 volatilidade = pd.DataFrame(retornos_diarios.std(), columns=['Vol'])
 volatilidade
 
+# Retornos médios diários
 retornos_medios = pd.DataFrame(retornos_diarios.mean(), columns=['Retornos'])
 retornos_medios
 
-#Juntando dataframes
-
+# Juntando dataframes com retornos médios e volatilidade
 risco_retorno = pd.concat([retornos_medios,volatilidade], axis=1)
 risco_retorno
 
+# O plot
 sns.scatterplot(data=risco_retorno, x='Vol', y='Retornos')
 plt.show()
 
+# O plot com os nomes dos ativos
 risco_retorno.index
-
 plt.subplots(figsize=(10,8))
 sns.scatterplot(data=risco_retorno, x='Vol',  y='Retornos')
 for i in range(risco_retorno.shape[0]):
