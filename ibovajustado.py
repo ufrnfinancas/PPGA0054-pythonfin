@@ -10,10 +10,10 @@ end = "2024-01-05"
 
 # data
 ibov = yf.download('^BVSP', start = start, end = end
-                   )['Adj Close']
+                   )['Close']
 
 usdbrl = yf.download('USDBRL=X', start = start, end = end
-                   )['Adj Close'] 
+                   )['Close'] 
 
 # dataframe
 ibovdf = pd.DataFrame(ibov)

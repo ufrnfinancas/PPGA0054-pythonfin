@@ -43,7 +43,7 @@ informes_diarios[['VL_TOTAL', 'VL_QUOTA', 'VL_PATRIM_LIQ', 'CAPTC_DIA', 'RESG_DI
 # Dados Cadastrais
 url = 'http://dados.cvm.gov.br/dados/FI/CAD/DADOS/cad_fi.csv'
 cadastral = pd.read_csv(url, sep=';', encoding='ISO-8859-1')
-# Filtrar fundos com "quant" na denominação
+# Filtrar fundos com "quant" na denominação/
 selecao = cadastral[cadastral['DENOM_SOCIAL'].str.contains('prev', case=False)]
 selecao = selecao[selecao['SIT'] != 'CANCELADA']
 # Filtrar dados de fundos selecionados
